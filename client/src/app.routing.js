@@ -1,0 +1,17 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var router_1 = require("@angular/router");
+//import { HomeComponent } from './home/index';
+var index_1 = require("./library/index");
+var index_2 = require("./login/index");
+var index_3 = require("./register/index");
+var index_4 = require("./_guards/index");
+var appRoutes = [
+    { path: '', component: index_1.LibraryComponent, canActivate: [index_4.AuthGuard] },
+    { path: 'login', component: index_2.LoginComponent },
+    { path: 'register', component: index_3.RegisterComponent },
+    // otherwise redirect to home
+    { path: '**', redirectTo: '' }
+];
+exports.routing = router_1.RouterModule.forRoot(appRoutes);
+//# sourceMappingURL=app.routing.js.map

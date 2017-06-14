@@ -1,0 +1,21 @@
+<nav class="sidebar nav-collapse height-100">
+	<div class="btn-group d-flex">
+		<button (click)="addBook()" type="button" class="btn btn-secondary sidebar-btn"><i class="material-icons">note_add</i></button>
+		<button (click)="editBook()" [disabled]="!selectedBook" type="button" class="btn btn-secondary sidebar-btn"><i class="material-icons">mode_edit</i></button>
+		<button (click)="removeBook()" [disabled]="!selectedBook" type="button" class="btn btn-secondary sidebar-btn"><i class="material-icons">delete_forever</i></button>
+	</div>
+	<ul class="list-group" style="height: 50%">
+		<li *ngFor="let book of books" (click)="clickBook(book)" class="list-group-item justify-content-between" [ngClass]="{'active': selectedBook && selectedBook._id == book._id }">
+			{{book.name}}
+			<span class="badge badge-default badge-pill">{{book.pages.length}}</span>
+		</li>
+	</ul>
+	<div *ngIf="selectedBook" class="btn-group d-flex">
+		<button (click)="addField()" type="button" class="btn btn-secondary sidebar-btn"><i class="material-icons">note_add</i></button>
+		<button (click)="editField()" [disabled]="!selectedField" type="button" class="btn btn-secondary sidebar-btn"><i class="material-icons">mode_edit</i></button>
+		<button (click)="removeField()" [disabled]="!selectedField" type="button" class="btn btn-secondary sidebar-btn"><i class="material-icons">delete_forever</i></button>
+	</div>
+	<ul *ngIf="selectedBook" class="list-group" style="height: 50%">
+	<li *ngFor="let field of selectedBook.fields" (click)="clickField(field)" [ngClass]="{'active': selectedField && selectedField._id == field._id }" class="list-group-item">{{field.name}}</li>
+	</ul>
+</nav>

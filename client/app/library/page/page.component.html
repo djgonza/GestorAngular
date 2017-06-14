@@ -1,0 +1,7 @@
+<div class="card col-sm-6" *ngFor="let field of page.fields">
+	<div class="card-block">
+		<pagefield-component [field]="field"></pagefield-component>
+	</div>
+</div>
+
+<button (click)="save()" class="btn btn-success">Guardar</button>

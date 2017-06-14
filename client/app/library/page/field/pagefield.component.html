@@ -1,0 +1,14 @@
+<div *ngIf="type === 'NUMBER'" class="form-group">
+    <label>{{field.name}}</label>
+    <input [ngModel]="field.value" (ngModelChange)="validate($event)" type="number" class="form-control">
+</div>
+
+<div *ngIf="type === 'STRING'" class="form-group">
+    <label>{{field.name}}</label>
+    <input [ngModel]="field.value" (ngModelChange)="validate($event)" type="text" class="form-control">
+</div>
+
+<div *ngIf="type === 'DATE'" class="form-group">
+    <label>{{field.name}}</label>
+    <input [ngModel]="field.value" (ngModelChange)="validate($event)" type="date" class="form-control">
+</div>
