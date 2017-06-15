@@ -5,7 +5,7 @@ var bookService = require('services/book.service');
 
 // routes
 router.get('/', getAllBooks);
-router.post('/', addBook);
+router.post('/', create);
 router.delete('/:id', deleteBook);
 router.put('/:id', updateBook);
 
@@ -16,7 +16,7 @@ function getAllBooks(req, res) {
     
 }
 
-function addBook(req, res) {
+function create(req, res) {
     
 }
 

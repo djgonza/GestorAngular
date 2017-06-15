@@ -1,10 +1,11 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+var LibrarySchema = require('schemas/library.schema');
 var bcrypt = require('bcryptjs');
 
-module.exports = mongoose.model('User', new Schema({
+module.exports = new Schema({
 
-	name: {
+	username: {
 		type: String,
 		required: true
 	},
@@ -14,7 +15,7 @@ module.exports = mongoose.model('User', new Schema({
 	password:{
 		type: String,
 		required: true,
-		set: bcrypt.hashSync(password, 10);
+		set: (password) => { return bcrypt.hashSync(password, 10); }
 	},
 	email: {
 		type: String,
@@ -25,7 +26,7 @@ module.exports = mongoose.model('User', new Schema({
 		default: Date.now,
 	},
 	library: {
-		type: ObjectId
+		type: Schema.Types.ObjectId
 	}
 
-}));
+});

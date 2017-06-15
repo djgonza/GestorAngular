@@ -1,6 +1,6 @@
 var config = require('config.json');
 var mongoose = require('mongoose');
-var Book = require('./../models/Book');
+var Book = require('models/book.model');
 mongoose.Promise = global.Promise;
 
 var service = {};
