@@ -2,6 +2,7 @@ export class Field {
 	
 	private _id: string;
 	name: string;
+	value:any;
 
 	constructor (_id:string, name:string) {
 		this._id = _id;

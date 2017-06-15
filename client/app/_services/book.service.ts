@@ -20,14 +20,14 @@ export class BookService {
 				[
 					new NumberField('123', 'Number', 123), 
 					new StringField('123', 'String', "hola"),
-					new DateField('123', 'Date', new Date()
+					new DateField('123', 'Date', new Date())
 				]
 			),
 			new Page('123', 
 				[
 					new NumberField('123', 'Number', 123), 
 					new StringField('123', 'String', "hola"),
-					new DateField('123', 'Date', new Date()
+					new DateField('123', 'Date', new Date())
 				]
 			)]
 		);
