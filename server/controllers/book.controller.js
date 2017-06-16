@@ -1,17 +1,17 @@
 var config = require('config.json');
 var express = require('express');
-var router = express.Router();
+var router = express.Router({mergeParams: true});
 var BookService = require('services/book.service');
 
 
 // routes
+router.use('/:bookId/pages', require('controllers/page.controller'));
+
 router.get('/', getAllBooks);
 router.get('/:bookId', getBook);
 router.post('/', createBook);
 router.put('/:bookId', updateBook);
 router.delete('/:bookId', deleteBook);
-
-router.use('/:bookId/pages', require('controllers/book.controller'));
 
 module.exports = router;
 
@@ -40,7 +40,7 @@ function getAllBooks(req, res) {
 }
 
 function createBook(req, res) {
-	
+
 	BookService.create(req.params.libraryId, req.body.name, req.body.structure)
 	.then(createdBook => {
 		res.status(200).send(createdBook);
@@ -52,8 +52,8 @@ function createBook(req, res) {
 }
 
 function updateBook(req, res) {
-	
-	BookService.update (req.params.oldBookId, req.body.newBook)
+
+	BookService.update (req.params.bookId, req.body)
 	.then(editedBook => {
 		res.status(200).send(editedBook);
 	})
@@ -65,9 +65,13 @@ function updateBook(req, res) {
 
 function deleteBook(req, res) {
 	
-	BookService.remove(req.body.bookId)
-	.then(validate => {
-		res.status(200).send(validate);
+	BookService.remove(req.params.bookId)
+	.then(removedBook => {
+		if(!removedBook) {
+			res.status(401).send('Not Found');
+		}else{
+			res.status(200).send(removedBook);
+		}
 	})
 	.catch(err => {
 		res.status(401).send(err);

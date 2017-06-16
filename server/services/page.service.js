@@ -1,6 +1,7 @@
 var config = require('config.json');
 var mongoose = require('mongoose');
-var Page = require('models/book.model');
+var Q = require('q');
+var Page = require('models/page.model');
 mongoose.Promise = global.Promise;
 
 var service = {};
@@ -71,8 +72,8 @@ function update (oldPageId, newPage) {
 
 	Page.findOneAndUpdate({_id: oldPageId}, {$set: newPage})
 	.exec()
-	.then(() => {
-		deferred.resolve(true);
+	.then(editedPage => {
+		deferred.resolve(editedPage);
 	})
 	.catch(err => {
 		deferred.reject(err);
@@ -86,9 +87,9 @@ function remove (pageId) {
 
 	var deferred = Q.defer();
 
-	Page.remove({_id: pageId})
-	.then(() => {
-		deferred.resolve(true);
+	Page.findByIdAndRemove({_id: pageId})
+	.then(removedPage => {
+		deferred.resolve(removedPage);
 	})
 	.catch(err => {
 		deferred.reject(err);

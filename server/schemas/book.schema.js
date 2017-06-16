@@ -16,7 +16,7 @@ module.exports = new Schema ({
 			required: true
 		},
 		valueType: {
-			type: Schema.Types.ObjectId,
+			type: String,
 			required: true
 		},
 		name: {

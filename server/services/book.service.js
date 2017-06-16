@@ -1,5 +1,6 @@
 var config = require('config.json');
 var mongoose = require('mongoose');
+var Q = require('q');
 var Book = require('models/book.model');
 mongoose.Promise = global.Promise;
 
@@ -72,8 +73,8 @@ function update (oldBookId, newBook) {
 
 	Book.findOneAndUpdate({_id: oldBookId}, {$set: newBook})
 	.exec()
-	.then(() => {
-		deferred.resolve(true);
+	.then(editedBook => {
+		deferred.resolve(editedBook);
 	})
 	.catch(err => {
 		deferred.reject(err);
@@ -87,9 +88,10 @@ function remove (bookId) {
 
 	var deferred = Q.defer();
 
-	Book.remove({_id: bookId})
-	.then(() => {
-		deferred.resolve(true);
+	Book.findByIdAndRemove({_id: bookId})
+	.exec()
+	.then(removedBook => {
+		deferred.resolve(removedBook);
 	})
 	.catch(err => {
 		deferred.reject(err);

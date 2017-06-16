@@ -1,6 +1,6 @@
 var config = require('config.json');
 var express = require('express');
-var router = express.Router();
+var router = express.Router({mergeParams: true});
 var PageService = require('services/page.service');
 
 // routes
@@ -37,7 +37,7 @@ function getPage (req, res) {
 }
 
 function createPage(req, res) {
-	
+
 	PageService.create (req.params.bookId, req.body.data)
 	.then(page => {
 		res.status(200).send(page);
@@ -50,9 +50,9 @@ function createPage(req, res) {
 
 function updatePage(req, res) {
 	
-	PageService.update (req.params.pageId, req.body.newPage)
-	.then(page => {
-		res.status(200).send(page);
+	PageService.update (req.params.pageId, req.body)
+	.then(updatedPage => {
+		res.status(200).send(updatedPage);
 	})
 	.catch(err => {
 		res.status(401).send(err);
@@ -63,8 +63,12 @@ function updatePage(req, res) {
 function deletePage(req, res) {
 	
 	PageService.remove (req.params.pageId)
-	.then(validate => {
-		res.status(200).send(validate);
+	.then(removedPage => {
+		if(!removedPage) {
+			res.status(401).send('Not Found');
+		}else{
+			res.status(200).send(removedPage);
+		}
 	})
 	.catch(err => {
 		res.status(401).send(err);
