@@ -1,12 +1,27 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-var FieldSchema = require('schemas/field.schema');
-var PageSchema = require('schemas/page.schema');
 
 module.exports = new Schema ({
-	name: {
-		type: String
+	library: {
+		type: Schema.Types.ObjectId,
+		required: true
 	},
-	pages: [PageSchema],
-	fields: [FieldSchema]
+	name: {
+		type: String,
+		required: true
+	},
+	structure: [{
+		ref: {
+			type: String,
+			required: true
+		},
+		valueType: {
+			type: Schema.Types.ObjectId,
+			required: true
+		},
+		name: {
+			type: String,
+			required: true
+		}
+	}]
 });

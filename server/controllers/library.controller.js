@@ -8,8 +8,11 @@ var router = express.Router();
 var User = require('models/user.model');
 
 // routes
-router.use('/books', require('./book.controller'));
-router.use('/field', require('./field.controller'));
-router.use('/page', require('./page.controller'));
+router.use('/:libraryId/books', require('controllers/book.controller'));
 
 module.exports = router;
+
+
+
+
+

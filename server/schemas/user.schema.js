@@ -28,9 +28,6 @@ module.exports = new Schema({
 	createdAt: { 
 		type: Date, 
 		default: Date.now,
-	},
-	library: {
-		type: Schema.Types.ObjectId
 	}
 
 });

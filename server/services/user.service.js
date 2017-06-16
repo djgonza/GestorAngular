@@ -9,6 +9,7 @@ var LibraryService = require('services/library.service');
 
 var service = {};
 
+service.getUser = getUser;
 service.authenticate = authenticate;
 service.create = create;
 //service.update = update;
@@ -16,13 +17,28 @@ service.create = create;
 
 module.exports = service;
 
+function getUser (username) {
+
+	var deferred = Q.defer();
+
+	User.findOne({username})
+	.exec()
+	.then(user => {
+		deferred.resolve(user);
+	})
+	.catch(err => {
+		deferred.reject(err);
+	});
+
+	return deferred.promise;
+
+}
+
 function authenticate(username, password) {
 
 	var deferred = Q.defer();
 
-	User.findOne({ username: username }, 'username library password')
-	.exec()
-	.then(user => {
+	getUser(username).then(user => {
 		if (user && bcrypt.compareSync(password, user.password)) {
 			// authentication successful
 			deferred.resolve({
@@ -38,62 +54,54 @@ function authenticate(username, password) {
 
 	})
 	.catch(err => {
-		deferred.reject(err.name + ': ' + err.message);
+		deferred.reject(err);
 	});
 
 	return deferred.promise;
 }
 
-function create(userParam) {
+function create(userParam) { //Create user and library
 
 	let deferred = Q.defer();
 
 	// validation
-	User.findOne({username: userParam.username})
-	.exec()
-	.then(user => {
-
+	getUser(userParam.username).then(user => {
 		if (user) {
 			// username already exists
 			deferred.reject('Username "' + userParam.username + '" is already taken');
 		} else {
 			createUser(userParam).then(createdUser => {
+				//Create library
+				LibraryService.create(createdUser._id);
+				//Return creted user
 				deferred.resolve(createdUser);
 			});
 		}
 
 	})
 	.catch(err => {
-		deferred.reject(err.name + ': ' + err.message);
+		deferred.reject(err);
 	});
 
-	function createUser(userParam) {
+	return deferred.promise;
+}
 
-		let deferred = Q.defer();
+function createUser(userParam) { //Create user and return this
 
-		//Serialice password
-		//userParam.password = bcrypt.hashSync(userParam.password, 10);
-		//Add library
-		LibraryService.create().then(createdLibrary => {
-			
-			userParam.library = createdLibrary;
+	let deferred = Q.defer();
 
-			new User (userParam)
-			.save()
-			.then(createdUser => {
-				deferred.resolve(createdUser);
-			})
-			.catch(err => {
-				deferred.reject(err.name + ': ' + err.message);
-			});
+	new User (userParam)
+	.save()
+	.then(createdUser => {
+		deferred.resolve(createdUser);
+	})
+	.catch(err => {
+		deferred.reject(err);
+	});
 
-		});
-
-		return deferred.promise;
-
-	}
 
 	return deferred.promise;
+
 }
 
 /*

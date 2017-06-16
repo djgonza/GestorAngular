@@ -9,9 +9,6 @@ var service = {};
 
 service.getLibrary = getLibrary;
 service.create = create;
-service.setBook = setBook;
-service.updateBook = updateBook;
-service.deleteBook = deleteBook;
 
 module.exports = service;
 
@@ -19,113 +16,31 @@ function getLibrary (userId) {
 
 	var deferred = Q.defer();
 
-    User.findById(userId)
-    .exec()
-    .then((user) => {
-    	deferred.resolve(user.library);
-    })
-    .catch((err) => {
-    	deferred.reject(err.name + ': ' + err.message);
-    });
+	Library.findOne({user: userId})
+	.exec()
+	.then((library) => {
+		deferred.resolve(library);
+	})
+	.catch((err) => {
+		deferred.reject(err);
+	});
 
-    return deferred.promise;
+	return deferred.promise;
 
 }
 
-function create () {
+function create (userId) {
 
 	let deferred = Q.defer();
 
-	new Library()
+	new Library({user: userId})
 		.save()
 		.then(createdLibrary => {
 			deferred.resolve(createdLibrary);
 		})
 		.catch(err => {
-			deferred.reject(err.name + ': ' + err.message);
+			deferred.reject(err);
 		});
-
-	return deferred.promise;
-
-}
-
-function setBook (libraryId, book) {
-    
-	let deferred = Q.defer();
-
-	getLibrary()
-	.then(library => {
-
-		library.books.push(book._id);
-		library
-		.save()
-		.then(savedLibrary => {
-			deferred.resolve(createdLibrary);
-		})
-		.catch(err => {
-			deferred.reject(err.name + ': ' + err.message);
-		});
-
-	})
-	.catch(err => {
-		deferred.reject(err.name + ': ' + err.message);
-	});
-
-	return deferred.promise;
-
-}
-
-function updateBook (libraryId, book) {
-
-	let deferred = Q.defer();
-
-	getLibrary()
-	.then(library => {
-
-		let bookIndex = library.books.indexOf(book._id);
-		library.books[bookIndex] = book;
-
-		library
-		.save()
-		.then(savedLibrary => {
-			deferred.resolve(createdLibrary);
-		})
-		.catch(err => {
-			deferred.reject(err.name + ': ' + err.message);
-		});
-
-	})
-	.catch(err => {
-		deferred.reject(err.name + ': ' + err.message);
-	});
-
-	return deferred.promise;
-
-}
-
-function deleteBook (libraryId, book) {
-
-	let deferred = Q.defer();
-
-	getLibrary()
-	.then(library => {
-
-		let bookIndex = library.books.indexOf(book._id);
-		library.books.splice(bookIndex, 1);
-
-		library
-		.save()
-		.then(savedLibrary => {
-			deferred.resolve(createdLibrary);
-		})
-		.catch(err => {
-			deferred.reject(err.name + ': ' + err.message);
-		});
-
-	})
-	.catch(err => {
-		deferred.reject(err.name + ': ' + err.message);
-	});
 
 	return deferred.promise;
 
