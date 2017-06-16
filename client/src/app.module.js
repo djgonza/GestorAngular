@@ -51,8 +51,10 @@ AppModule = __decorate([
         providers: [
             app_config_1.AppConfig,
             index_2.AuthGuard,
+            index_2.Jwt,
             index_3.AlertService,
             index_3.AuthenticationService,
+            index_3.LibraryService,
             index_3.UserService,
             index_3.BookService,
             index_3.PageService,

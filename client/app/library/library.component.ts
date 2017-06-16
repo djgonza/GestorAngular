@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 import { User, Book, Field, Page, Event } from '../_models/index';
-import { BookService, FieldService } from '../_services/index';
+import { AlertService, LibraryService, BookService, FieldService } from '../_services/index';
 
 @Component({
 	moduleId: module.id,
@@ -11,7 +11,8 @@ import { BookService, FieldService } from '../_services/index';
 
 export class LibraryComponent implements OnInit {
 	
-	private bookService: BookService;
+	private _id: string;
+	private userId: string
 	private currentUser: User;
 	private books: Book[];
 	private selectedBook: Book;
@@ -20,9 +21,19 @@ export class LibraryComponent implements OnInit {
 	private showModalField:Field;
 	private selectedPageIndex:number;
 
-	constructor(bookService:BookService) {
+	constructor(private libraryService: LibraryService, private bookService:BookService, private alertService: AlertService) {
 		
-		this.bookService = bookService;
+		//Set library id
+		libraryService.getLibrary()
+		.subscribe(response => {
+			var res = response.json();
+			this._id = res._id;
+			this.userId = res.user; //Create new user!!!!!!! y modificar el modelo
+		},
+		error => {
+			this.alertService.error(error._body);
+		});
+
 		this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
 
 	}

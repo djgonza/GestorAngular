@@ -13,8 +13,20 @@ var core_1 = require("@angular/core");
 var index_1 = require("../_models/index");
 var index_2 = require("../_services/index");
 var LibraryComponent = (function () {
-    function LibraryComponent(bookService) {
+    function LibraryComponent(libraryService, bookService, alertService) {
+        var _this = this;
+        this.libraryService = libraryService;
         this.bookService = bookService;
+        this.alertService = alertService;
+        //Set library id
+        libraryService.getLibrary()
+            .subscribe(function (response) {
+            var res = response.json();
+            _this._id = res._id;
+            _this.userId = res.user; //Create new user!!!!!!! y modificar el modelo
+        }, function (error) {
+            _this.alertService.error(error._body);
+        });
         this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     }
     LibraryComponent.prototype.ngOnInit = function () {
@@ -97,7 +109,7 @@ LibraryComponent = __decorate([
         templateUrl: 'library.component.html',
         selector: 'library-component'
     }),
-    __metadata("design:paramtypes", [index_2.BookService])
+    __metadata("design:paramtypes", [index_2.LibraryService, index_2.BookService, index_2.AlertService])
 ], LibraryComponent);
 exports.LibraryComponent = LibraryComponent;
 //# sourceMappingURL=library.component.js.map

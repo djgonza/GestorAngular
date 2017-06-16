@@ -11,29 +11,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var http_1 = require("@angular/http");
-var app_config_1 = require("../app.config");
-var UserService = (function () {
-    function UserService(http, config) {
-        this.http = http;
-        this.config = config;
+var Jwt = (function () {
+    function Jwt() {
     }
-    UserService.prototype.getAll = function () {
-        return this.http.get(this.config.apiUrl + '/users', this.jwt()).map(function (response) { return response.json(); });
-    };
-    UserService.prototype.getById = function (_id) {
-        return this.http.get(this.config.apiUrl + '/users/' + _id, this.jwt()).map(function (response) { return response.json(); });
-    };
-    UserService.prototype.create = function (user) {
-        return this.http.post(this.config.apiUrl + '/users/register', user, this.jwt());
-    };
-    UserService.prototype.update = function (user) {
-        return this.http.put(this.config.apiUrl + '/users/' + user._id, user, this.jwt());
-    };
-    UserService.prototype.delete = function (_id) {
-        return this.http.delete(this.config.apiUrl + '/users/' + _id, this.jwt());
-    };
-    // private helper methods
-    UserService.prototype.jwt = function () {
+    Jwt.createHeader = function () {
         // create authorization header with jwt token
         var currentUser = JSON.parse(localStorage.getItem('currentUser'));
         if (currentUser && currentUser.token) {
@@ -41,11 +22,11 @@ var UserService = (function () {
             return new http_1.RequestOptions({ headers: headers });
         }
     };
-    return UserService;
+    return Jwt;
 }());
-UserService = __decorate([
+Jwt = __decorate([
     core_1.Injectable(),
-    __metadata("design:paramtypes", [http_1.Http, app_config_1.AppConfig])
-], UserService);
-exports.UserService = UserService;
-//# sourceMappingURL=user.service.js.map
+    __metadata("design:paramtypes", [])
+], Jwt);
+exports.Jwt = Jwt;
+//# sourceMappingURL=jwt.guard.js.map

@@ -11,22 +11,29 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var http_1 = require("@angular/http");
+var index_1 = require("../_guards/index");
 var app_config_1 = require("../app.config");
-var index_1 = require("../_models/index");
+var index_2 = require("../_models/index");
 var LibraryService = (function () {
     function LibraryService(http, config) {
         this.http = http;
         this.config = config;
     }
-    LibraryService.prototype.getAllBooks = function () {
-        var book = new index_1.Book('123', 'Mi primer LIbro', [], []);
-        var book1 = new index_1.Book('123', 'Mi segundo LIbro', [], []);
-        var book2 = new index_1.Book('123', 'Mi tercer LIbro', [], []);
-        var book3 = new index_1.Book('123', 'Mi cuarto LIbro', [], []);
-        return [book, book1, book2, book3];
+    LibraryService.prototype.getLibrary = function () {
+        return this.http.get(this.config.apiUrl + '/library', index_1.Jwt.createHeader());
+    };
+    //getAllBooks ():Book[] { //Revisar
+    //this.http.get(this.config.apiUrl + '/users', this.jwt())
+    //.map((response: Response) => response.json());
+    //}
+    LibraryService.prototype.getBook = function (_id) {
+        return new index_2.Book(_id, 'Nombre', [], []);
     };
     LibraryService.prototype.updateBook = function (book) {
         return book;
+    };
+    LibraryService.prototype.removeBook = function (_id) {
+        return true;
     };
     /*getAll() {
         return this.http.get(this.config.apiUrl + '/users', this.jwt()).map((response: Response) => response.json());
