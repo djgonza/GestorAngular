@@ -5,32 +5,23 @@ mongoose.Promise = global.Promise;
 
 var service = {};
 
-service.getAll = getAll;
 service.create = create;
 service.update = update;
-service.delete = _delete;
 
 module.exports = service;
 
-function getAll(userId) {
-      
-    mongoose.connect(config.connectionString);
+function create (name, pages, fields) {
 
-    //Buscamos la libreria
-    //Buscamos los libros de la libreria
-
-    mongoose.connection.close();
-
-}
-
-function create () {
+	return new Book({
+		name: name,
+		pages: pages,
+		fields: fields
+	});
 
 }
 
-function _delete () {
+function update (oldBook, newBook) {
     
-}
+	return Object.assign(newBook, oldBook);
 
-function update () {
-    
 }

@@ -12,21 +12,4 @@ router.use('/books', require('./book.controller'));
 router.use('/field', require('./field.controller'));
 router.use('/page', require('./page.controller'));
 
-router.get('/create', (req, res) => {
-
-	connectionDb.connect();
-
-	User.findById('123')
-	.exec()
-	.then((user) => {
-		console.log(user);
-		res.status(200).send(user);
-		connectionDb.disconnect();
-	})
-	.catch((err) => {
-		if(err) res.status(400).send(err);
-	});
-	
-});
-
 module.exports = router;

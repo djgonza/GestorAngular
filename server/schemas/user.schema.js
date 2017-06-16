@@ -5,21 +5,25 @@ var bcrypt = require('bcryptjs');
 
 module.exports = new Schema({
 
+	firstName : {
+		type: String,
+		required: true
+	},
+	lastName:{
+		type: String
+	},
 	username: {
 		type: String,
 		required: true
 	},
-	secondName:{
-		type: String
+	email: {
+		type: String,
+		required: true
 	},
 	password:{
 		type: String,
 		required: true,
 		set: (password) => { return bcrypt.hashSync(password, 10); }
-	},
-	email: {
-		type: String,
-		required: true
 	},
 	createdAt: { 
 		type: Date, 

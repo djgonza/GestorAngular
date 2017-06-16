@@ -14,30 +14,29 @@ module.exports = router;
 
 function authenticate(req, res) {
 	userService.authenticate(req.body.username, req.body.password)
-		.then(function (user) {
+		.then((user) => {
 			if (user) {
 				// authentication successful
-				res.send(user);
+				res.status(200).send(user);
 			} else {
 				// authentication failed
 				res.status(401).send('Username or password is incorrect');
 			}
 		})
-		.catch(function (err) {
+		.catch((err) => {
 			res.status(400).send(err);
 		});
 }
 
 function register(req, res) {
-	
+
 	if(!req.body.username || !req.body.password || !req.body.email) {
-		res.status(401).send(err);
+		res.status(401);
 		return;
 	}
 
 	userService.create(req.body)
 		.then((newUser) => {
-			console.log('newUser', newUser);
 			res.sendStatus(200);
 		})
 		.catch((err) => {

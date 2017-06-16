@@ -4,7 +4,6 @@ var jwt = require('jsonwebtoken');
 var bcrypt = require('bcryptjs');
 var Q = require('q');
 var mongoose = require('mongoose');
-var connectionDb = require('middleware/connectionDb');
 var User = require('models/user.model');
 var LibraryService = require('services/library.service');
 
@@ -18,30 +17,28 @@ service.create = create;
 module.exports = service;
 
 function authenticate(username, password) {
-	
+
 	var deferred = Q.defer();
 
-	connectionDb.connect();
-
-	User.findOne({ username: username })
+	User.findOne({ username: username }, 'username library password')
 	.exec()
 	.then(user => {
-
 		if (user && bcrypt.compareSync(password, user.password)) {
 			// authentication successful
-			user.token = jwt.sign({ id: user._id }, config.secret);
-			deferred.resolve(user);
+			deferred.resolve({
+				_id: user._id,
+				username: user.username,
+				library: user.library,
+				token: jwt.sign({ id: user._id }, config.secret)
+			});
 		} else {
 			// authentication failed
 			deferred.resolve();
 		}
 
-		connectionDb.disconnect();
-
 	})
 	.catch(err => {
 		deferred.reject(err.name + ': ' + err.message);
-		connectionDb.disconnect();
 	});
 
 	return deferred.promise;
@@ -50,8 +47,6 @@ function authenticate(username, password) {
 function create(userParam) {
 
 	let deferred = Q.defer();
-
-	connectionDb.connect();
 
 	// validation
 	User.findOne({username: userParam.username})
@@ -63,16 +58,13 @@ function create(userParam) {
 			deferred.reject('Username "' + userParam.username + '" is already taken');
 		} else {
 			createUser(userParam).then(createdUser => {
-				console.log('createdUser', createdUser);
 				deferred.resolve(createdUser);
-				connectionDb.disconnect();
 			});
 		}
 
 	})
 	.catch(err => {
 		deferred.reject(err.name + ': ' + err.message);
-		connectionDb.disconnect();
 	});
 
 	function createUser(userParam) {
@@ -80,7 +72,7 @@ function create(userParam) {
 		let deferred = Q.defer();
 
 		//Serialice password
-		userParam.password = bcrypt.hashSync(userParam.password, 10);
+		//userParam.password = bcrypt.hashSync(userParam.password, 10);
 		//Add library
 		LibraryService.create().then(createdLibrary => {
 			
