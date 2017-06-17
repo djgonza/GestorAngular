@@ -6,3 +6,4 @@ export * from './dateField';
 export * from './stringField';
 export * from './numberField';
 export * from './event';
+export * from './library';

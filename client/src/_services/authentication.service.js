@@ -11,7 +11,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var http_1 = require("@angular/http");
-require("rxjs/add/operator/map");
+var Observable_1 = require("rxjs/Observable");
+require("rxjs/Rx");
 var app_config_1 = require("../app.config");
 var AuthenticationService = (function () {
     function AuthenticationService(http, config) {
@@ -22,16 +23,19 @@ var AuthenticationService = (function () {
         return this.http.post(this.config.apiUrl + '/users/authenticate', { username: username, password: password })
             .map(function (response) {
             // login successful if there's a jwt token in the response
-            var user = response.json();
-            if (user && user.token) {
-                // store user details and jwt token in local storage to keep user logged in between page refreshes
-                localStorage.setItem('currentUser', JSON.stringify(user));
+            var res = response.json();
+            if (res.token) {
+                // save token
+                localStorage.setItem('token', JSON.stringify(res.token));
             }
+        })
+            .catch(function (res) {
+            return Observable_1.Observable.throw(res);
         });
     };
     AuthenticationService.prototype.logout = function () {
         // remove user from local storage to log user out
-        localStorage.removeItem('currentUser');
+        localStorage.removeItem('token');
     };
     return AuthenticationService;
 }());

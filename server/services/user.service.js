@@ -10,12 +10,29 @@ var LibraryService = require('services/library.service');
 var service = {};
 
 service.getUser = getUser;
+service.getUserInfo = getUserInfo;
 service.authenticate = authenticate;
 service.create = create;
 //service.update = update;
 //service.remove = remove;
 
 module.exports = service;
+
+function getUserInfo (id) {
+
+	var deferred = Q.defer();
+	User.findOne({_id: id}, {password:0})
+	.exec()
+	.then(user => {
+		deferred.resolve(user);
+	})
+	.catch(err => {
+		deferred.reject(err);
+	});
+
+	return deferred.promise;
+
+}
 
 function getUser (username) {
 
@@ -42,9 +59,6 @@ function authenticate(username, password) {
 		if (user && bcrypt.compareSync(password, user.password)) {
 			// authentication successful
 			deferred.resolve({
-				_id: user._id,
-				username: user.username,
-				library: user.library,
 				token: jwt.sign({ id: user._id }, config.secret)
 			});
 		} else {

@@ -16,9 +16,9 @@ var Jwt = (function () {
     }
     Jwt.createHeader = function () {
         // create authorization header with jwt token
-        var currentUser = JSON.parse(localStorage.getItem('currentUser'));
-        if (currentUser && currentUser.token) {
-            var headers = new http_1.Headers({ 'Authorization': currentUser.token });
+        var token = JSON.parse(localStorage.getItem('token'));
+        if (token) {
+            var headers = new http_1.Headers({ 'Authorization': token });
             return new http_1.RequestOptions({ headers: headers });
         }
     };

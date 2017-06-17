@@ -53,7 +53,7 @@ __decorate([
 ], SidebarComponent.prototype, "books", void 0);
 __decorate([
     core_1.Input(),
-    __metadata("design:type", index_1.Book)
+    __metadata("design:type", Object)
 ], SidebarComponent.prototype, "selectedBook", void 0);
 __decorate([
     core_1.Output(),

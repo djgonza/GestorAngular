@@ -4,7 +4,6 @@ function __export(m) {
 }
 Object.defineProperty(exports, "__esModule", { value: true });
 __export(require("./user"));
-__export(require("./book"));
 __export(require("./page"));
 __export(require("./field"));
 __export(require("./dateField"));

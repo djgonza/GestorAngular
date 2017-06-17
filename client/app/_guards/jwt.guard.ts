@@ -8,9 +8,9 @@ export class Jwt {
 
     static createHeader () {
     	// create authorization header with jwt token
-		let currentUser = JSON.parse(localStorage.getItem('currentUser'));
-		if (currentUser && currentUser.token) {
-			let headers = new Headers({ 'Authorization': currentUser.token });
+		let token = JSON.parse(localStorage.getItem('token'));
+		if (token) {
+			let headers = new Headers({ 'Authorization': token });
 			return new RequestOptions({ headers: headers });
 		}
     }

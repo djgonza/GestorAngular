@@ -29,6 +29,8 @@ function getBook (req, res) {
 
 function getAllBooks(req, res) {
 
+	console.log(req.params.libraryId);
+
 	BookService.loadAll(req.params.libraryId)
 	.then(books => {
 		res.status(200).send(books);

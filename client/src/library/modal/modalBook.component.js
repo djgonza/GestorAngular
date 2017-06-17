@@ -44,7 +44,7 @@ var ModalBook = (function () {
 }());
 __decorate([
     core_1.Input(),
-    __metadata("design:type", index_1.Book)
+    __metadata("design:type", Object)
 ], ModalBook.prototype, "book", void 0);
 __decorate([
     core_1.Output(),

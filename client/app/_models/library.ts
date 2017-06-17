@@ -1,19 +1,10 @@
-export class Library {
+import { User, Book } from '../_models/index';
+
+export interface Library {
 	
-	private _id: string;
-	private user: string;
-
-	constructor (_id:string, user:string) {
-		this._id = _id;
-		this.user = user;
-	}
-
-	getId ():string {
-		return this._id;
-	}
-
-	getUser ():string {
-		return this.user;
-	}
+	_id: string;
+	user: User;
+	books:Book[];
+	selectedBook:Book;
 
 }

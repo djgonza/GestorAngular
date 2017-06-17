@@ -1,19 +1,26 @@
 import { Field } from './field';
 import { Page } from './page';
 
-export class Book {
+export interface Book {
 	
-	private _id: string;
-	name: string;
-	fields: Field[];
-	pages: Page[];
+	/*{
+        "_id": "59441dcf7f7ab00e8ae6746f",
+        "library": "59440a7d613fc70da74be2d3",
+        "name": "Mi primer libro",
+        "__v": 0,
+        "structure": [
+            {
+                "ref": "Mi primer Campo",
+                "valueType": "String",
+                "name": "Mi primer Campo",
+                "_id": "59441dcf7f7ab00e8ae67470"
+            }
+        ]
+    }*/
 
-	constructor (_id:string, name:string, fields:Field[], pages:Page[]) {
-		this._id = _id;
-		this.name = name;
-		this.fields = fields;
-		this.pages = pages;
-	}
+	_id: string;
+	name: string;
+	structure: Structure[];
 
 	/* _id */
 	getId ():string {

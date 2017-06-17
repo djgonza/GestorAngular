@@ -23,6 +23,7 @@ var index_6 = require("./library/modal/index");
 var index_7 = require("./library/page/index");
 var index_8 = require("./login/index");
 var index_9 = require("./register/index");
+var index_10 = require("./_components/index");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -37,6 +38,7 @@ AppModule = __decorate([
             app_routing_1.routing
         ],
         declarations: [
+            index_10.Library,
             app_component_1.AppComponent,
             index_1.AlertComponent,
             index_4.LibraryComponent,

@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var http_1 = require("@angular/http");
+var Observable_1 = require("rxjs/Observable");
 var index_1 = require("../_guards/index");
 var app_config_1 = require("../app.config");
 var index_2 = require("../_models/index");
@@ -20,48 +21,47 @@ var LibraryService = (function () {
         this.config = config;
     }
     LibraryService.prototype.getLibrary = function () {
-        return this.http.get(this.config.apiUrl + '/library', index_1.Jwt.createHeader());
+        return this.http.get(this.config.apiUrl + '/library', index_1.Jwt.createHeader())
+            .map(function (res) {
+            return res.json()._id;
+        })
+            .catch(function (err) {
+            return Observable_1.Observable.throw(err);
+        });
     };
-    //getAllBooks ():Book[] { //Revisar
-    //this.http.get(this.config.apiUrl + '/users', this.jwt())
-    //.map((response: Response) => response.json());
-    //}
+    LibraryService.prototype.getUser = function () {
+        return this.http.get(this.config.apiUrl + '/users', index_1.Jwt.createHeader())
+            .map(function (res) {
+            var user = res.json();
+            return new index_2.User(user._id, user.username, user.firstName, user.lastName, user.email);
+        })
+            .catch(function (err) {
+            return Observable_1.Observable.throw(err);
+        });
+    };
+    LibraryService.prototype.getAllBooks = function (libraryId) {
+        console.log(libraryId);
+        var url = this.config.apiUrl + "/library/" + libraryId + "/books";
+        return this.http.get(url, index_1.Jwt.createHeader())
+            .map(function (res) {
+            console.log('res gab', res.json());
+            var parsedRes = res.json();
+            return parsedRes.map(function (book) {
+                return new Book(book);
+            });
+        })
+            .catch(function (err) {
+            return Observable_1.Observable.throw(err);
+        });
+    };
     LibraryService.prototype.getBook = function (_id) {
-        return new index_2.Book(_id, 'Nombre', [], []);
+        return new Book(_id, 'Nombre', [], []);
     };
     LibraryService.prototype.updateBook = function (book) {
         return book;
     };
     LibraryService.prototype.removeBook = function (_id) {
         return true;
-    };
-    /*getAll() {
-        return this.http.get(this.config.apiUrl + '/users', this.jwt()).map((response: Response) => response.json());
-    }
-
-    getById(_id: string) {
-        return this.http.get(this.config.apiUrl + '/users/' + _id, this.jwt()).map((response: Response) => response.json());
-    }
-
-    create(user: User) {
-        return this.http.post(this.config.apiUrl + '/users/register', user, this.jwt());
-    }
-
-    update(user: User) {
-        return this.http.put(this.config.apiUrl + '/users/' + user._id, user, this.jwt());
-    }
-
-    delete(_id: string) {
-        return this.http.delete(this.config.apiUrl + '/users/' + _id, this.jwt());
-    }*/
-    // private helper methods
-    LibraryService.prototype.jwt = function () {
-        // create authorization header with jwt token
-        var currentUser = JSON.parse(localStorage.getItem('currentUser'));
-        if (currentUser && currentUser.token) {
-            var headers = new http_1.Headers({ 'Authorization': 'Bearer ' + currentUser.token });
-            return new http_1.RequestOptions({ headers: headers });
-        }
     };
     return LibraryService;
 }());

@@ -2,12 +2,13 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var router_1 = require("@angular/router");
 //import { HomeComponent } from './home/index';
-var index_1 = require("./library/index");
+//import { LibraryComponent } from './library/index';
+var index_1 = require("./_components/index");
 var index_2 = require("./login/index");
 var index_3 = require("./register/index");
 var index_4 = require("./_guards/index");
 var appRoutes = [
-    { path: '', component: index_1.LibraryComponent, canActivate: [index_4.AuthGuard] },
+    { path: 'library', component: index_1.Library, canActivate: [index_4.AuthGuard] },
     { path: 'login', component: index_2.LoginComponent },
     { path: 'register', component: index_3.RegisterComponent },
     // otherwise redirect to home

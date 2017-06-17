@@ -1,44 +1,48 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var Book = (function () {
-    function Book(_id, name, fields, pages) {
-        this._id = _id;
-        this.name = name;
-        this.fields = fields;
-        this.pages = pages;
-    }
-    /* _id */
-    Book.prototype.getId = function () {
-        return this._id;
-    };
-    /* Name */
-    Book.prototype.setName = function (name) {
-        this.name = name;
-    };
-    Book.prototype.getName = function () {
-        return this.name;
-    };
-    /* Field */
-    Book.prototype.addField = function (field) {
-        this.fields.push(field);
-    };
-    Book.prototype.getField = function (index) {
-        return this.fields[index];
-    };
-    Book.prototype.getFields = function () {
-        return this.fields;
-    };
-    /* Page */
-    Book.prototype.addPage = function (field) {
-        this.fields.push(field);
-    };
-    Book.prototype.getPage = function (index) {
-        return this.pages[index];
-    };
-    Book.prototype.getPages = function () {
-        return this.pages;
-    };
-    return Book;
-}());
-exports.Book = Book;
+var field_1 = require("./field");
+var page_1 = require("./page");
+{
+    return this._id;
+}
+/* Name */
+setName(name, string);
+void {
+    this: .name = name
+};
+getName();
+string;
+{
+    return this.name;
+}
+/* Field */
+addField(field, field_1.Field);
+void {
+    this: .fields.push(field)
+};
+getField(index, number);
+field_1.Field;
+{
+    return this.fields[index];
+}
+getFields();
+field_1.Field[];
+{
+    return this.fields;
+}
+/* Page */
+addPage(field, field_1.Field);
+void {
+    this: .fields.push(field)
+};
+getPage(index, number);
+page_1.Page;
+{
+    return this.pages[index];
+}
+getPages();
+page_1.Page[];
+{
+    return this.pages;
+}
 //# sourceMappingURL=book.js.map

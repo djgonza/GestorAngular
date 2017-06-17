@@ -20,14 +20,6 @@ app.use(expressJwt({
 	secret: config.secret,
 	resultProperty: 'user',
 	getToken: (req) => {
-		//console.log('authorization', req.headers.authorization);
-		//console.log('query', req.query);
-		/*if (req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Bearer') {
-			return req.headers.authorization.split(' ')[1];
-		} else if (req.query && req.query.oauth_token) {
-			return req.query.token;
-		}
-		return null;*/
 		if (req.headers.authorization) {
 			return req.headers.authorization;
 		} else if (req.query && req.query.oauth_token) {

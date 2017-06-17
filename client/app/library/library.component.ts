@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { User, Book, Field, Page, Event } from '../_models/index';
+import { LibraryInterface } from '../_interfaces/index';
+import { Library, User, Book, Field, Page, Event } from '../_models/index';
 import { AlertService, LibraryService, BookService, FieldService } from '../_services/index';
 
 @Component({
@@ -9,13 +10,13 @@ import { AlertService, LibraryService, BookService, FieldService } from '../_ser
 	selector: 'library-component'
 })
 
-export class LibraryComponent implements OnInit {
+export class LibraryComponent implements LibraryInterface, OnInit {
+
+	_id:string;
+	user:User;
+	books: Book[];
+	selectedBook: Book;
 	
-	private _id: string;
-	private userId: string
-	private currentUser: User;
-	private books: Book[];
-	private selectedBook: Book;
 	private selectedField: Field;
 	private showModalBook:Book;
 	private showModalField:Field;
@@ -23,27 +24,45 @@ export class LibraryComponent implements OnInit {
 
 	constructor(private libraryService: LibraryService, private bookService:BookService, private alertService: AlertService) {
 		
-		//Set library id
-		libraryService.getLibrary()
-		.subscribe(response => {
-			var res = response.json();
-			this._id = res._id;
-			this.userId = res.user; //Create new user!!!!!!! y modificar el modelo
-		},
-		error => {
-			this.alertService.error(error._body);
-		});
-
-		this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
-
+		this.load ();
+		
 	}
 
 	ngOnInit() {
-		this.loadAllBooks();
+		console.log('library', this);
 	}
 
-	loadAllBooks () {
-		this.books = this.bookService.getAllBooks();
+	load () {
+		this.loadUserDetail ();
+		this.loadLibrary();
+	}
+
+	loadUserDetail () {
+		this.libraryService.getUser()
+		.subscribe((user:User) => {
+			this.user = user;
+		}, err => {
+
+		});
+	}
+
+	loadLibrary () {
+		this.libraryService.getLibrary()
+		.subscribe((libraryId:string) => {
+			this._id = libraryId;
+			this.loadBooks(libraryId);
+		}, err => {
+
+		});
+	}
+
+	loadBooks (libraryId:string) {
+		this.libraryService.getAllBooks(this._id)
+		.subscribe((books:Book[]) => {
+			console.log('loaded books', books);
+		}, err => {
+
+		});
 	}
 
 	bookEvent (event:Event) {

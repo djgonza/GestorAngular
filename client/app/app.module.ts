@@ -22,6 +22,8 @@ import { PageComponent, PageFieldComponent } from './library/page/index';
 import { LoginComponent } from './login/index';
 import { RegisterComponent } from './register/index';
 
+import { Library } from './_components/index';
+
 @NgModule({
     imports: [
         BrowserModule,
@@ -30,6 +32,7 @@ import { RegisterComponent } from './register/index';
         routing
     ],
     declarations: [
+        Library,
         AppComponent,
         AlertComponent,
         LibraryComponent,

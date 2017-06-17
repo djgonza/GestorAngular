@@ -6,18 +6,29 @@ var userService = require('services/user.service');
 // routes
 router.post('/authenticate', authenticate);
 router.post('/register', register);
+router.get('/', getUserInfo);
 /*router.get('/current', getCurrent);
 router.put('/:_id', update);
 router.delete('/:_id', _delete);*/
 
 module.exports = router;
 
+function getUserInfo (req, res) {
+	userService.getUserInfo(req.user.id)
+	.then(userInfo => {
+		res.status(200).send(userInfo);
+	})
+	.catch(err => {
+		res.status(400).send(err);
+	});
+}
+
 function authenticate(req, res) {
 	userService.authenticate(req.body.username, req.body.password)
-		.then((user) => {
-			if (user) {
+		.then((token) => {
+			if (token) {
 				// authentication successful
-				res.status(200).send(user);
+				res.status(200).send(token);
 			} else {
 				// authentication failed
 				res.status(401).send('Username or password is incorrect');
@@ -29,7 +40,6 @@ function authenticate(req, res) {
 }
 
 function register(req, res) {
-
 	if(!req.body.username || !req.body.password || !req.body.email) {
 		res.status(401);
 		return;
@@ -42,7 +52,6 @@ function register(req, res) {
 		.catch((err) => {
 			res.status(400).send(err);
 		});
-	
 }
 
 /*function getAll(req, res) {

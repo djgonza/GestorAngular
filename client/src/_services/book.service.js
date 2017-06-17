@@ -19,7 +19,7 @@ var BookService = (function () {
         this.config = config;
     }
     BookService.prototype.getAllBooks = function () {
-        var book = new index_1.Book('123', 'Mi primer LIbro', [new index_1.NumberField('123', 'Mi primer field', 123)], [new index_1.Page('123', [
+        var book = new Book('123', 'Mi primer LIbro', [new index_1.NumberField('123', 'Mi primer field', 123)], [new index_1.Page('123', [
                 new index_1.NumberField('123', 'Number', 123),
                 new index_1.StringField('123', 'String', "hola"),
                 new index_1.DateField('123', 'Date', new Date())
@@ -29,13 +29,13 @@ var BookService = (function () {
                 new index_1.StringField('123', 'String', "hola"),
                 new index_1.DateField('123', 'Date', new Date())
             ])]);
-        var book1 = new index_1.Book('456', 'Mi segundo LIbro', [], []);
-        var book2 = new index_1.Book('789', 'Mi tercer LIbro', [], []);
-        var book3 = new index_1.Book('134', 'Mi cuarto LIbro', [], []);
+        var book1 = new Book('456', 'Mi segundo LIbro', [], []);
+        var book2 = new Book('789', 'Mi tercer LIbro', [], []);
+        var book3 = new Book('134', 'Mi cuarto LIbro', [], []);
         return [book, book1, book2, book3];
     };
     BookService.prototype.getBook = function (_id) {
-        return new index_1.Book(_id, 'Nombre', [], []);
+        return new Book(_id, 'Nombre', [], []);
     };
     BookService.prototype.updateBook = function (book) {
         return book;
