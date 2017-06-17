@@ -1,3 +1,4 @@
+declare var __moduleName: string;
 import { Component, OnInit, Input } from '@angular/core';
 
 import { LibraryInterface } from './index';
@@ -5,8 +6,8 @@ import { Book, User } from '../index';
 import { LibraryService, AlertService } from '../../_services/index';
 
 @Component({
-	moduleId: module.id,
-	templateUrl: 'library.component.html',
+	moduleId: __moduleName,
+	templateUrl: './library.component.html',
 	selector: 'library-component'
 })
 

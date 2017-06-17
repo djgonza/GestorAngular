@@ -3,7 +3,9 @@ import { Http, Headers, RequestOptions, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { Jwt } from '../_guards/index';
 import { AppConfig } from '../app.config';
-import { Library, User, Book, NumberField, DateField, StringField, Page } from '../_models/index';
+import { Library, User, NumberField, DateField, StringField, Page } from '../_models/index';
+
+import { Book } from '../_components';
 
 @Injectable()
 export class LibraryService {
@@ -44,7 +46,7 @@ export class LibraryService {
 			console.log('res gab', res.json());
 			let parsedRes = res.json();
 			return parsedRes.map((book:any) => {
-				return new Book(book);
+				//return new Book(book);
 			});
 		})
 		.catch((err: Response | any) => {
@@ -52,38 +54,4 @@ export class LibraryService {
 		});
 		
 	}
-
-	getBook (_id:string):Book { //Revisar
-		return new Book(_id, 'Nombre', [], []);
-	}
-
-	updateBook (book:Book):Book { //Revisar
-		return book;
-	}
-
-	removeBook (_id:string):boolean { //Revisar
-		return true;
-	}
-
-
-
-	/*getAll() {
-		return this.http.get(this.config.apiUrl + '/users', this.jwt()).map((response: Response) => response.json());
-	}
-
-	getById(_id: string) {
-		return this.http.get(this.config.apiUrl + '/users/' + _id, this.jwt()).map((response: Response) => response.json());
-	}
-
-	create(user: User) {
-		return this.http.post(this.config.apiUrl + '/users/register', user, this.jwt());
-	}
-
-	update(user: User) {
-		return this.http.put(this.config.apiUrl + '/users/' + user._id, user, this.jwt());
-	}
-
-	delete(_id: string) {
-		return this.http.delete(this.config.apiUrl + '/users/' + _id, this.jwt());
-	}*/
 }

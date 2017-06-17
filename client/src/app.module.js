@@ -1,69 +1,87 @@
-"use strict";
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = require("@angular/core");
-var platform_browser_1 = require("@angular/platform-browser");
-var forms_1 = require("@angular/forms");
-var http_1 = require("@angular/http");
-var app_component_1 = require("./app.component");
-var app_routing_1 = require("./app.routing");
-var app_config_1 = require("./app.config");
-var index_1 = require("./_directives/index");
-var index_2 = require("./_guards/index");
-var index_3 = require("./_services/index");
-//import { HomeComponent } from './home/index';
-var index_4 = require("./library/index");
-var index_5 = require("./library/sidebar/index");
-var index_6 = require("./library/modal/index");
-var index_7 = require("./library/page/index");
-var index_8 = require("./login/index");
-var index_9 = require("./register/index");
-var index_10 = require("./_components/index");
-var AppModule = (function () {
-    function AppModule() {
-    }
-    return AppModule;
-}());
-AppModule = __decorate([
-    core_1.NgModule({
-        imports: [
-            platform_browser_1.BrowserModule,
-            forms_1.FormsModule,
-            http_1.HttpModule,
-            app_routing_1.routing
+System.register(["@angular/core", "@angular/platform-browser", "@angular/http", "@angular/forms", "./_components/index", "./_guards/index", "./_services/index", "./app.routing", "./app.config"], function (exports_1, context_1) {
+    "use strict";
+    var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+        var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+        if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+        else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+        return c > 3 && r && Object.defineProperty(target, key, r), r;
+    };
+    var __moduleName = context_1 && context_1.id;
+    var core_1, platform_browser_1, http_1, forms_1, index_1, index_2, index_3, app_routing_1, app_config_1, AppModule;
+    return {
+        setters: [
+            function (core_1_1) {
+                core_1 = core_1_1;
+            },
+            function (platform_browser_1_1) {
+                platform_browser_1 = platform_browser_1_1;
+            },
+            function (http_1_1) {
+                http_1 = http_1_1;
+            },
+            function (forms_1_1) {
+                forms_1 = forms_1_1;
+            },
+            function (index_1_1) {
+                index_1 = index_1_1;
+            },
+            function (index_2_1) {
+                index_2 = index_2_1;
+            },
+            function (index_3_1) {
+                index_3 = index_3_1;
+            },
+            function (app_routing_1_1) {
+                app_routing_1 = app_routing_1_1;
+            },
+            function (app_config_1_1) {
+                app_config_1 = app_config_1_1;
+            }
         ],
-        declarations: [
-            index_10.Library,
-            app_component_1.AppComponent,
-            index_1.AlertComponent,
-            index_4.LibraryComponent,
-            index_5.SidebarComponent,
-            index_8.LoginComponent,
-            index_9.RegisterComponent,
-            index_6.ModalBook,
-            index_6.ModalField,
-            index_7.PageComponent,
-            index_7.PageFieldComponent
-        ],
-        providers: [
-            app_config_1.AppConfig,
-            index_2.AuthGuard,
-            index_2.Jwt,
-            index_3.AlertService,
-            index_3.AuthenticationService,
-            index_3.LibraryService,
-            index_3.UserService,
-            index_3.BookService,
-            index_3.PageService,
-            index_3.FieldService
-        ],
-        bootstrap: [app_component_1.AppComponent]
-    })
-], AppModule);
-exports.AppModule = AppModule;
+        execute: function () {
+            AppModule = (function () {
+                function AppModule() {
+                }
+                AppModule = __decorate([
+                    core_1.NgModule({
+                        imports: [
+                            platform_browser_1.BrowserModule,
+                            http_1.HttpModule,
+                            forms_1.FormsModule,
+                            app_routing_1.routing
+                        ],
+                        declarations: [
+                            index_1.App,
+                            index_1.Login,
+                            index_1.Register,
+                            index_1.Library,
+                            index_1.Alert
+                            /*AlertComponent,
+                            LibraryComponent,
+                            SidebarComponent,
+                            LoginComponent,
+                            RegisterComponent,
+                            ModalBook,
+                            ModalField,
+                            PageComponent,
+                            PageFieldComponent*/
+                        ],
+                        providers: [
+                            app_config_1.AppConfig,
+                            index_2.AuthGuard,
+                            index_2.Jwt,
+                            index_3.AlertService,
+                            index_3.AuthenticationService,
+                            index_3.LibraryService,
+                            index_3.UserService
+                        ],
+                        bootstrap: [index_1.App]
+                    })
+                ], AppModule);
+                return AppModule;
+            }());
+            exports_1("AppModule", AppModule);
+        }
+    };
+});
 //# sourceMappingURL=app.module.js.map

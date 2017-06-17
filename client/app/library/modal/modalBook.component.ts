@@ -11,7 +11,7 @@ import { Book, Event } from '../../_models/index';
 
 export class ModalBook {
 
-	@Input() book:Book;
+	/*@Input() book:Book;
 	@Output() bookEvent = new EventEmitter<Event>();
 	private valid:boolean;
 
@@ -45,6 +45,6 @@ export class ModalBook {
 
 	getValue () {
 		return this.book.getName();
-	}
+	}*/
 
 }

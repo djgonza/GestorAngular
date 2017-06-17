@@ -9,7 +9,12 @@ import { Book, Field, Event } from '../../_models/index';
 
 export class SidebarComponent implements OnInit {
 
-	@Input() books:Book[];
+	ngOnInit() {
+
+		
+	}
+
+	/*@Input() books:Book[];
 
 	@Input() selectedBook:Book;
 	@Output() bookEvent = new EventEmitter<Event>();
@@ -60,6 +65,6 @@ export class SidebarComponent implements OnInit {
 	removeField () {
 		if(confirm('¿Borrar el campo '+this.selectedField.getName()+'?'))
 			this.fieldEvent.emit(new Event('REMOVE_FIELD', this.selectedField));
-	}
+	}*/
 
 }

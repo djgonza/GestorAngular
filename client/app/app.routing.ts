@@ -2,15 +2,15 @@
 
 //import { HomeComponent } from './home/index';
 //import { LibraryComponent } from './library/index';
-import { Library } from './_components/index';
+import { Login, Register,Library } from './_components/index';
 import { LoginComponent } from './login/index';
 import { RegisterComponent } from './register/index';
 import { AuthGuard } from './_guards/index';
 
 const appRoutes: Routes = [
     { path: 'library', component: Library, canActivate: [AuthGuard] },
-    { path: 'login', component: LoginComponent },
-    { path: 'register', component: RegisterComponent },
+    { path: 'login', component: Login },
+    { path: 'register', component: Register },
 
     // otherwise redirect to home
     { path: '**', redirectTo: '' }

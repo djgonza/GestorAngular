@@ -1,7 +1,7 @@
 import { Field } from './field';
 import { Page } from './page';
 
-export interface Book {
+export class Book {
 	
 	/*{
         "_id": "59441dcf7f7ab00e8ae6746f",
@@ -18,48 +18,5 @@ export interface Book {
         ]
     }*/
 
-	_id: string;
-	name: string;
-	structure: Structure[];
-
-	/* _id */
-	getId ():string {
-		return this._id;
-	}
-
-	/* Name */
-	setName (name:string):void {
-		this.name = name;
-	}
-
-	getName ():string {
-		return this.name;
-	}
-
-	/* Field */
-	addField (field:Field):void {
-		this.fields.push(field);
-	}
-
-	getField (index:number):Field {
-		return this.fields[index];
-	}
-
-	getFields ():Field[] {
-		return this.fields;
-	}
-
-	/* Page */
-	addPage (field:Field):void {
-		this.fields.push(field);
-	}
-
-	getPage (index:number):Page {
-		return this.pages[index];
-	}
-
-	getPages ():Page[]{
-		return this.pages;
-	}
 
 }

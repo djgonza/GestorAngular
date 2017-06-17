@@ -1,9 +1,39 @@
-"use strict";
-function __export(m) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-}
-Object.defineProperty(exports, "__esModule", { value: true });
-__export(require("./library/index"));
-__export(require("./book/index"));
-__export(require("./user/index"));
+System.register(["./alert/index", "./app/index", "./login/index", "./register/index", "./library/index", "./book/index", "./user/index"], function (exports_1, context_1) {
+    "use strict";
+    var __moduleName = context_1 && context_1.id;
+    function exportStar_1(m) {
+        var exports = {};
+        for (var n in m) {
+            if (n !== "default") exports[n] = m[n];
+        }
+        exports_1(exports);
+    }
+    return {
+        setters: [
+            function (index_1_1) {
+                exportStar_1(index_1_1);
+            },
+            function (index_2_1) {
+                exportStar_1(index_2_1);
+            },
+            function (index_3_1) {
+                exportStar_1(index_3_1);
+            },
+            function (index_4_1) {
+                exportStar_1(index_4_1);
+            },
+            function (index_5_1) {
+                exportStar_1(index_5_1);
+            },
+            function (index_6_1) {
+                exportStar_1(index_6_1);
+            },
+            function (index_7_1) {
+                exportStar_1(index_7_1);
+            }
+        ],
+        execute: function () {
+        }
+    };
+});
 //# sourceMappingURL=index.js.map

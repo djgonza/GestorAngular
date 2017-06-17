@@ -1,1 +1,1 @@
-export class User implements UserInterface {}
+export class User {}//implements UserInterface {}
