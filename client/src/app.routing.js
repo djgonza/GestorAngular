@@ -16,9 +16,9 @@ System.register(["@angular/router", "./_components/index", "./_guards/index"], f
         ],
         execute: function () {
             appRoutes = [
-                { path: 'library', component: index_1.Library, canActivate: [index_2.AuthGuard] },
-                { path: 'login', component: index_1.Login },
-                { path: 'register', component: index_1.Register },
+                { path: 'library', component: index_1.LibraryComponent, canActivate: [index_2.AuthGuard] },
+                { path: 'login', component: index_1.LoginComponent },
+                { path: 'register', component: index_1.RegisterComponent },
                 // otherwise redirect to home
                 { path: '**', redirectTo: '' }
             ];

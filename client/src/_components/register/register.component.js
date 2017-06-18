@@ -7,7 +7,7 @@ System.register(["@angular/core"], function (exports_1, context_1) {
         return c > 3 && r && Object.defineProperty(target, key, r), r;
     };
     var __moduleName = context_1 && context_1.id;
-    var core_1, Register;
+    var core_1, RegisterComponent;
     return {
         setters: [
             function (core_1_1) {
@@ -15,19 +15,19 @@ System.register(["@angular/core"], function (exports_1, context_1) {
             }
         ],
         execute: function () {
-            Register = (function () {
-                function Register() {
+            RegisterComponent = (function () {
+                function RegisterComponent() {
                 }
-                Register = __decorate([
+                RegisterComponent = __decorate([
                     core_1.Component({
                         moduleId: __moduleName,
                         templateUrl: 'register.component.html',
                         selector: 'register-component'
                     })
-                ], Register);
-                return Register;
+                ], RegisterComponent);
+                return RegisterComponent;
             }());
-            exports_1("Register", Register);
+            exports_1("RegisterComponent", RegisterComponent);
         }
     };
 });

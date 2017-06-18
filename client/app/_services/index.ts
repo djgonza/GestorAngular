@@ -2,5 +2,4 @@
 export * from './authentication.service';
 export * from './user.service';
 export * from './library.service';
-export * from './field.service';
-export * from './page.service';
+export * from './book.service';

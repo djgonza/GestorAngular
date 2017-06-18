@@ -10,9 +10,12 @@ import { AlertService, AuthenticationService } from '../../_services/index';
 	templateUrl: 'login.component.html'
 })
 
-export class Login implements OnInit {
-	model: any = {};
-	loading = true;
+export class LoginComponent implements OnInit {
+	
+	username:string = "";
+	password:string = "";
+	loading:boolean = false;
+	sended:boolean = false;
 
 	constructor(
 		private route: ActivatedRoute,
@@ -27,13 +30,14 @@ export class Login implements OnInit {
 
 	login() {
 		this.loading = true;
-		this.authenticationService.login(this.model.username, this.model.password)
+		this.authenticationService.login(this.username, this.password)
 			.subscribe(
 				(token:string) => {
 					this.router.navigate(['/library']);
 				},
 				(error:any) => {
 					this.alertService.error(error._body);
+					this.sended = true;
 					this.loading = false;
 				});
 	}

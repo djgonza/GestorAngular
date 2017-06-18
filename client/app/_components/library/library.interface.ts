@@ -5,6 +5,5 @@ export interface LibraryInterface {
 	_id: string;
 	user:User;
 	books:Book[];
-	selectedBook:Book;
 
 }

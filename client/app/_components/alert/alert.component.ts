@@ -9,7 +9,7 @@ import { AlertService } from '../../_services/index';
     templateUrl: 'alert.component.html'
 })
 
-export class Alert {
+export class AlertComponent {
     message: any;
 
     constructor(private alertService: AlertService) { }

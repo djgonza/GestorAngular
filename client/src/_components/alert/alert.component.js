@@ -10,7 +10,7 @@ System.register(["@angular/core", "../../_services/index"], function (exports_1,
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var __moduleName = context_1 && context_1.id;
-    var core_1, index_1, Alert;
+    var core_1, index_1, AlertComponent;
     return {
         setters: [
             function (core_1_1) {
@@ -21,25 +21,25 @@ System.register(["@angular/core", "../../_services/index"], function (exports_1,
             }
         ],
         execute: function () {
-            Alert = (function () {
-                function Alert(alertService) {
+            AlertComponent = (function () {
+                function AlertComponent(alertService) {
                     this.alertService = alertService;
                 }
-                Alert.prototype.ngOnInit = function () {
+                AlertComponent.prototype.ngOnInit = function () {
                     var _this = this;
                     this.alertService.getMessage().subscribe(function (message) { _this.message = message; });
                 };
-                Alert = __decorate([
+                AlertComponent = __decorate([
                     core_1.Component({
                         moduleId: __moduleName,
                         selector: 'alert',
                         templateUrl: 'alert.component.html'
                     }),
                     __metadata("design:paramtypes", [index_1.AlertService])
-                ], Alert);
-                return Alert;
+                ], AlertComponent);
+                return AlertComponent;
             }());
-            exports_1("Alert", Alert);
+            exports_1("AlertComponent", AlertComponent);
         }
     };
 });

@@ -11,12 +11,11 @@ import { LibraryService, AlertService } from '../../_services/index';
 	selector: 'library-component'
 })
 
-export class Library implements LibraryInterface, OnInit {
+export class LibraryComponent implements LibraryInterface, OnInit {
 
 	_id:string;
 	user:User;
-	books: Book[];
-	selectedBook: Book;
+	books:Book[] = [];
 
 	constructor(private libraryService: LibraryService, private alertService: AlertService) {
 		
@@ -25,6 +24,10 @@ export class Library implements LibraryInterface, OnInit {
 	}
 
 	ngOnInit() {
+		//console.log('library', this);
+	}
+
+	show() {
 		console.log('library', this);
 	}
 
@@ -35,10 +38,10 @@ export class Library implements LibraryInterface, OnInit {
 
 	loadUserDetail () {
 		this.libraryService.getUser()
-		.subscribe((user:User) => {
-			this.user = user;
+		.subscribe((user) => {
+			this.user = new User(user._id, user.username, user.firstName, user.lastName, user.email);
 		}, err => {
-
+			this.alertService.error(err);
 		});
 	}
 
@@ -48,16 +51,18 @@ export class Library implements LibraryInterface, OnInit {
 			this._id = libraryId;
 			this.loadBooks(libraryId);
 		}, err => {
-
+			this.alertService.error(err);
 		});
 	}
 
 	loadBooks (libraryId:string) {
 		this.libraryService.getAllBooks(this._id)
-		.subscribe((books:Book[]) => {
-			console.log('loaded books', books);
+		.subscribe((books) => {
+			books.map((book:any) => {
+				this.books.push(new Book(book._id, book.name, book.library, book.structure));
+			});
 		}, err => {
-
+			this.alertService.error(err);
 		});
 	}
 

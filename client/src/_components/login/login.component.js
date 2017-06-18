@@ -10,7 +10,7 @@ System.register(["@angular/core", "@angular/router", "../../_services/index"], f
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var __moduleName = context_1 && context_1.id;
-    var core_1, router_1, index_1, Login;
+    var core_1, router_1, index_1, LoginComponent;
     return {
         setters: [
             function (core_1_1) {
@@ -24,31 +24,34 @@ System.register(["@angular/core", "@angular/router", "../../_services/index"], f
             }
         ],
         execute: function () {
-            Login = (function () {
-                function Login(route, router, authenticationService, alertService) {
+            LoginComponent = (function () {
+                function LoginComponent(route, router, authenticationService, alertService) {
                     this.route = route;
                     this.router = router;
                     this.authenticationService = authenticationService;
                     this.alertService = alertService;
-                    this.model = {};
-                    this.loading = true;
+                    this.username = "";
+                    this.password = "";
+                    this.loading = false;
+                    this.sended = false;
                 }
-                Login.prototype.ngOnInit = function () {
+                LoginComponent.prototype.ngOnInit = function () {
                     // reset login status
                     this.authenticationService.logout();
                 };
-                Login.prototype.login = function () {
+                LoginComponent.prototype.login = function () {
                     var _this = this;
                     this.loading = true;
-                    this.authenticationService.login(this.model.username, this.model.password)
+                    this.authenticationService.login(this.username, this.password)
                         .subscribe(function (token) {
                         _this.router.navigate(['/library']);
                     }, function (error) {
                         _this.alertService.error(error._body);
+                        _this.sended = true;
                         _this.loading = false;
                     });
                 };
-                Login = __decorate([
+                LoginComponent = __decorate([
                     core_1.Component({
                         moduleId: __moduleName,
                         selector: 'login-component',
@@ -58,10 +61,10 @@ System.register(["@angular/core", "@angular/router", "../../_services/index"], f
                         router_1.Router,
                         index_1.AuthenticationService,
                         index_1.AlertService])
-                ], Login);
-                return Login;
+                ], LoginComponent);
+                return LoginComponent;
             }());
-            exports_1("Login", Login);
+            exports_1("LoginComponent", LoginComponent);
         }
     };
 });

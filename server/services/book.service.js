@@ -71,7 +71,7 @@ function update (oldBookId, newBook) {
     
 	var deferred = Q.defer();
 
-	Book.findOneAndUpdate({_id: oldBookId}, {$set: newBook})
+	Book.findOneAndUpdate({_id: oldBookId}, {$set: newBook}, {new: true})
 	.exec()
 	.then(editedBook => {
 		deferred.resolve(editedBook);

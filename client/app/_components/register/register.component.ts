@@ -7,4 +7,4 @@ import { Component } from '@angular/core';
 	selector: 'register-component'
 })
 
-export class Register {} 
+export class RegisterComponent {} 

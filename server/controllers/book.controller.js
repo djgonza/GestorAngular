@@ -29,8 +29,6 @@ function getBook (req, res) {
 
 function getAllBooks(req, res) {
 
-	console.log(req.params.libraryId);
-
 	BookService.loadAll(req.params.libraryId)
 	.then(books => {
 		res.status(200).send(books);
@@ -67,6 +65,8 @@ function updateBook(req, res) {
 
 function deleteBook(req, res) {
 	
+	//TODO: delete all page from this book
+
 	BookService.remove(req.params.bookId)
 	.then(removedBook => {
 		if(!removedBook) {

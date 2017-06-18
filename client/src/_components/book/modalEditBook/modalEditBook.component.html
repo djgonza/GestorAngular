@@ -1,0 +1,13 @@
+<div class="modal-bg">
+	<div class="card modal-content" >
+		<div class="card-block">
+			<div class="form-group">
+				<label>Nombre del Libro</label>
+				<input [ngModel]="book.name" (ngModelChange)="validate($event)" type="text" class="form-control" placeholder="Inserta un nombre..." />
+				<small *ngIf="!valid && submited" class="form-text text-muted">Nombre Incorrecto</small>
+			</div>
+			<button class="btn btn-success" [disabled]="!valid" (click)="save()">Guardar</button>
+			<button class="btn btn-success" (click)="close()">Salir</button>
+		</div>
+	</div>
+</div>

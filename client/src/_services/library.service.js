@@ -1,4 +1,4 @@
-System.register(["@angular/core", "@angular/http", "rxjs/Observable", "../_guards/index", "../app.config", "../_models/index"], function (exports_1, context_1) {
+System.register(["@angular/core", "@angular/http", "rxjs/Observable", "../_guards/index", "../app.config"], function (exports_1, context_1) {
     "use strict";
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -10,7 +10,7 @@ System.register(["@angular/core", "@angular/http", "rxjs/Observable", "../_guard
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var __moduleName = context_1 && context_1.id;
-    var core_1, http_1, Observable_1, index_1, app_config_1, index_2, LibraryService;
+    var core_1, http_1, Observable_1, index_1, app_config_1, LibraryService;
     return {
         setters: [
             function (core_1_1) {
@@ -27,9 +27,6 @@ System.register(["@angular/core", "@angular/http", "rxjs/Observable", "../_guard
             },
             function (app_config_1_1) {
                 app_config_1 = app_config_1_1;
-            },
-            function (index_2_1) {
-                index_2 = index_2_1;
             }
         ],
         execute: function () {
@@ -50,22 +47,19 @@ System.register(["@angular/core", "@angular/http", "rxjs/Observable", "../_guard
                 LibraryService.prototype.getUser = function () {
                     return this.http.get(this.config.apiUrl + '/users', index_1.Jwt.createHeader())
                         .map(function (res) {
-                        var user = res.json();
-                        return new index_2.User(user._id, user.username, user.firstName, user.lastName, user.email);
+                        return res.json();
                     })
                         .catch(function (err) {
                         return Observable_1.Observable.throw(err);
                     });
                 };
                 LibraryService.prototype.getAllBooks = function (libraryId) {
-                    console.log(libraryId);
                     var url = this.config.apiUrl + "/library/" + libraryId + "/books";
                     return this.http.get(url, index_1.Jwt.createHeader())
                         .map(function (res) {
-                        console.log('res gab', res.json());
                         var parsedRes = res.json();
                         return parsedRes.map(function (book) {
-                            //return new Book(book);
+                            return book;
                         });
                     })
                         .catch(function (err) {

@@ -51,20 +51,16 @@ System.register(["@angular/core", "@angular/platform-browser", "@angular/http", 
                             app_routing_1.routing
                         ],
                         declarations: [
-                            index_1.App,
-                            index_1.Login,
-                            index_1.Register,
-                            index_1.Library,
-                            index_1.Alert
-                            /*AlertComponent,
-                            LibraryComponent,
-                            SidebarComponent,
-                            LoginComponent,
-                            RegisterComponent,
-                            ModalBook,
-                            ModalField,
-                            PageComponent,
-                            PageFieldComponent*/
+                            index_1.AppComponent,
+                            index_1.LoginComponent,
+                            index_1.RegisterComponent,
+                            index_1.LibraryComponent,
+                            index_1.AlertComponent,
+                            index_1.BookComponent,
+                            index_1.UserComponent,
+                            index_1.ModalCreateBook,
+                            index_1.ModalEditBook,
+                            index_1.ModalRemoveBook
                         ],
                         providers: [
                             app_config_1.AppConfig,
@@ -73,9 +69,10 @@ System.register(["@angular/core", "@angular/platform-browser", "@angular/http", 
                             index_3.AlertService,
                             index_3.AuthenticationService,
                             index_3.LibraryService,
-                            index_3.UserService
+                            index_3.UserService,
+                            index_3.BookService
                         ],
-                        bootstrap: [index_1.App]
+                        bootstrap: [index_1.AppComponent]
                     })
                 ], AppModule);
                 return AppModule;

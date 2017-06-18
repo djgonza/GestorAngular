@@ -7,7 +7,7 @@ System.register(["@angular/core"], function (exports_1, context_1) {
         return c > 3 && r && Object.defineProperty(target, key, r), r;
     };
     var __moduleName = context_1 && context_1.id;
-    var core_1, Landing;
+    var core_1, LandingComponent;
     return {
         setters: [
             function (core_1_1) {
@@ -15,18 +15,19 @@ System.register(["@angular/core"], function (exports_1, context_1) {
             }
         ],
         execute: function () {
-            Landing = (function () {
-                function Landing() {
+            LandingComponent = (function () {
+                function LandingComponent() {
                 }
-                Landing = __decorate([
+                LandingComponent = __decorate([
                     core_1.Component({
-                        templateUrl: 'library.component.html',
-                        selector: 'library-component'
+                        moduleId: __moduleName,
+                        templateUrl: 'landing.component.html',
+                        selector: 'landing-component'
                     })
-                ], Landing);
-                return Landing;
+                ], LandingComponent);
+                return LandingComponent;
             }());
-            exports_1("Landing", Landing);
+            exports_1("LandingComponent", LandingComponent);
         }
     };
 });

@@ -1,4 +1,4 @@
-System.register(["./alert.service", "./authentication.service", "./user.service", "./library.service", "./field.service", "./page.service"], function (exports_1, context_1) {
+System.register(["./alert.service", "./authentication.service", "./user.service", "./library.service", "./book.service"], function (exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     function exportStar_1(m) {
@@ -22,11 +22,8 @@ System.register(["./alert.service", "./authentication.service", "./user.service"
             function (library_service_1_1) {
                 exportStar_1(library_service_1_1);
             },
-            function (field_service_1_1) {
-                exportStar_1(field_service_1_1);
-            },
-            function (page_service_1_1) {
-                exportStar_1(page_service_1_1);
+            function (book_service_1_1) {
+                exportStar_1(book_service_1_1);
             }
         ],
         execute: function () {
