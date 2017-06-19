@@ -67,10 +67,10 @@ function create (book, data) {
 }
 
 function update (oldPageId, newPage) {
-    
+
 	var deferred = Q.defer();
 
-	Page.findOneAndUpdate({_id: oldPageId}, {$set: newPage})
+	Page.findOneAndUpdate({_id: oldPageId}, {$set: newPage}, {new: true})
 	.exec()
 	.then(editedPage => {
 		deferred.resolve(editedPage);

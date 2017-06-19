@@ -1,8 +1,8 @@
 declare var __moduleName: string;
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnChanges } from '@angular/core';
 
 import { LibraryInterface } from './index';
-import { Book, User } from '../index';
+import { Book, User, Structure } from '../index';
 import { LibraryService, AlertService } from '../../_services/index';
 
 @Component({
@@ -11,11 +11,12 @@ import { LibraryService, AlertService } from '../../_services/index';
 	selector: 'library-component'
 })
 
-export class LibraryComponent implements LibraryInterface, OnInit {
+export class LibraryComponent implements LibraryInterface, OnInit, OnChanges {
 
 	_id:string;
 	user:User;
 	books:Book[] = [];
+	bookSelected:Book = null;
 
 	constructor(private libraryService: LibraryService, private alertService: AlertService) {
 		
@@ -25,6 +26,14 @@ export class LibraryComponent implements LibraryInterface, OnInit {
 
 	ngOnInit() {
 		//console.log('library', this);
+	}
+
+	ngOnChanges (changes:any) {
+		console.log('library cahnge', changes);
+	}
+
+	selectBook (book:Book) {
+		this.bookSelected = book;
 	}
 
 	show() {
@@ -59,7 +68,10 @@ export class LibraryComponent implements LibraryInterface, OnInit {
 		this.libraryService.getAllBooks(this._id)
 		.subscribe((books) => {
 			books.map((book:any) => {
-				this.books.push(new Book(book._id, book.name, book.library, book.structure));
+				let structure = book.structure.map((structure:any) => {
+					return new Structure(structure.ref, structure.valueType, structure.name, structure._id);
+				});
+				this.books.push(new Book(book._id, book.name, book.library, structure));
 			});
 		}, err => {
 			this.alertService.error(err);

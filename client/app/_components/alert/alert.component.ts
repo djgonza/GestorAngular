@@ -1,5 +1,5 @@
 declare var __moduleName: string;
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 
 import { AlertService } from '../../_services/index';
 
@@ -9,12 +9,20 @@ import { AlertService } from '../../_services/index';
     templateUrl: 'alert.component.html'
 })
 
-export class AlertComponent {
+export class AlertComponent implements OnInit, OnChanges {
     message: any;
 
     constructor(private alertService: AlertService) { }
 
     ngOnInit() {
         this.alertService.getMessage().subscribe(message => { this.message = message; });
+    }
+
+    ngOnChanges (changes: SimpleChanges) {
+    	console.log(changes);
+    }
+
+    hideMessage () {
+    	this.message = null;
     }
 }

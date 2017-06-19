@@ -1,0 +1,21 @@
+<h2 class="d-flex justify-content-end">
+	<span class="mr-auto">Campos</span>
+	<i class="material-icons" (click)="showModalCreateStructure = true" >note_add</i>
+</h2>
+
+<ul *ngFor="let structure of book.structure" class="list-group">
+	<li class="list-group-item d-flex justify-content-end" (click)="selectStructure(structure)" [ngClass]="{'active': structure === structureSelected }">
+		<span class="mr-auto">{{structure.name}}</span>
+		<i *ngIf="structure === structureSelected" (click)="showActions($event, structure)" class="material-icons">settings</i>
+		<ul *ngIf="structure === structureSelected && shownActions" class="list-group" style="position: fixed; color: black">
+			<li class="list-group-item"><i (click)="editStructure(structure)" class="material-icons">mode_edit</i></li>
+			<li class="list-group-item"><i (click)="removeStructure(structure)" class="material-icons">delete_forever</i></li>
+		</ul>
+	</li>
+</ul>
+
+<modal-create-structure-component
+*ngIf="showModalCreateStructure"
+(newStructure)="createStructure($event)"
+(closeModal)="closeModals()">
+</modal-create-structure-component>

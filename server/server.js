@@ -6,10 +6,7 @@ var bodyParser = require('body-parser');
 var expressJwt = require('express-jwt');
 var config = require('config.json');
 var revokedToken = require('middleware/revokedToken');
-var mongoose = require('mongoose');
-
-
-mongoose.connect(config.connectionString);
+var dbConnection = require('middleware/dbConnection');
 
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));

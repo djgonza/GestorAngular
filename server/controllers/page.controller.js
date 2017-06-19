@@ -49,7 +49,7 @@ function createPage(req, res) {
 }
 
 function updatePage(req, res) {
-	
+
 	PageService.update (req.params.pageId, req.body)
 	.then(updatedPage => {
 		res.status(200).send(updatedPage);

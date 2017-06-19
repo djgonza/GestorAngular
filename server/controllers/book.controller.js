@@ -9,11 +9,22 @@ router.use('/:bookId/pages', require('controllers/page.controller'));
 
 router.get('/', getAllBooks);
 router.get('/:bookId', getBook);
+router.get('/:bookId/numberPages', getNumberPages);
 router.post('/', createBook);
 router.put('/:bookId', updateBook);
 router.delete('/:bookId', deleteBook);
 
 module.exports = router;
+
+function getNumberPages (req, res) {
+	BookService.numberOfPages(req.params.bookId)
+	.then(number => {
+		res.status(200).send({number: number});
+	})
+	.catch(err => {
+		res.status(401).send(err);
+	});
+}
 
 function getBook (req, res) {
 

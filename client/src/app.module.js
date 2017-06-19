@@ -60,7 +60,11 @@ System.register(["@angular/core", "@angular/platform-browser", "@angular/http", 
                             index_1.UserComponent,
                             index_1.ModalCreateBook,
                             index_1.ModalEditBook,
-                            index_1.ModalRemoveBook
+                            index_1.ModalRemoveBook,
+                            index_1.StructureComponent,
+                            index_1.ModalCreateStructure,
+                            index_1.PageComponent,
+                            index_1.PageFieldComponent
                         ],
                         providers: [
                             app_config_1.AppConfig,

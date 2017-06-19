@@ -1,0 +1,21 @@
+<div class="modal-bg">
+	<div class="card modal-content" >
+		<div class="card-block">
+			<div class="form-group">
+				<label>Nombre del Campo</label>
+				<input [ngModel]="name" (ngModelChange)="setName($event)" type="text" class="form-control" placeholder="Inserta un nombre..." />
+				<small *ngIf="!validName && submited" class="form-text text-muted">Nombre Incorrecto!</small>
+			</div>
+			<div class="form-group">
+				<label>Tipo del Campo</label>
+				<select class="form-control" [ngModel]="valueType" (ngModelChange)="setType($event)">
+					<option [disabled]="true" selected>Selecciona un tipo</option>
+					<option *ngFor="let type of selectablesValuesType" [value]="type.type">{{type.name}}</option>
+				</select>
+				<small *ngIf="!validType && submited" class="form-text text-muted">Seleccione un tipo!</small>
+			</div>
+			<button class="btn btn-success" [disabled]="!valid" (click)="save()">Guardar</button>
+			<button class="btn btn-success" (click)="close()">Salir</button>
+		</div>
+	</div>
+</div>

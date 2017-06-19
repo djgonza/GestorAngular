@@ -69,6 +69,46 @@ System.register(["@angular/core", "@angular/http", "rxjs/Observable", "../_guard
                         return Observable_1.Observable.throw(err);
                     });
                 };
+                BookService.prototype.loadNumberOfPages = function (library, book) {
+                    var url = this.config.apiUrl + "/library/" + library + "/books/" + book._id + "/numberPages";
+                    return this.http.get(url, index_1.Jwt.createHeader())
+                        .map(function (res) {
+                        return res.json();
+                    })
+                        .catch(function (err) {
+                        return Observable_1.Observable.throw(err);
+                    });
+                };
+                BookService.prototype.savePage = function (library, book, page) {
+                    var url = this.config.apiUrl + "/library/" + library + "/books/" + book + "/pages/" + page._id;
+                    return this.http.put(url, page, index_1.Jwt.createHeader())
+                        .map(function (res) {
+                        return res.json();
+                    })
+                        .catch(function (err) {
+                        return Observable_1.Observable.throw(err);
+                    });
+                };
+                BookService.prototype.addPage = function (library, book, page) {
+                    var url = this.config.apiUrl + "/library/" + library + "/books/" + book + "/pages";
+                    return this.http.post(url, page, index_1.Jwt.createHeader())
+                        .map(function (res) {
+                        return res.json();
+                    })
+                        .catch(function (err) {
+                        return Observable_1.Observable.throw(err);
+                    });
+                };
+                BookService.prototype.getAllPages = function (library, book) {
+                    var url = this.config.apiUrl + "/library/" + library + "/books/" + book + "/pages";
+                    return this.http.get(url, index_1.Jwt.createHeader())
+                        .map(function (res) {
+                        return res.json();
+                    })
+                        .catch(function (err) {
+                        return Observable_1.Observable.throw(err);
+                    });
+                };
                 BookService = __decorate([
                     core_1.Injectable(),
                     __metadata("design:paramtypes", [http_1.Http, app_config_1.AppConfig])

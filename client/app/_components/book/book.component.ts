@@ -1,6 +1,6 @@
 declare var __moduleName: string;
 
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 import { Book } from './index';
 import { BookService, AlertService } from '../../_services/index';
@@ -11,27 +11,25 @@ import { BookService, AlertService } from '../../_services/index';
 	selector: 'book-component'
 })
 
-export class BookComponent implements OnInit {
+export class BookComponent {
 
 	@Input() library:string;
 	@Input() books:Book[];
+	bookSelected:Book;
+	@Output() bookEvent = new EventEmitter<Book>();
 	showModalCreateBook:boolean = false;
 	showModalEditBook:boolean = false;
 	showModalRemoveBook:boolean = false;
-	bookSelected:Book;
-	shownActions:Boolean = false
+	shownActions:boolean = false
 
 	constructor (private bookService: BookService, private alertService: AlertService) {
 
 	}
 
-	ngOnInit () {
-		//console.log('book', this);
-	}
-
 	selectBook (book:Book) {
 		this.bookSelected = book;
 		this.shownActions = false;
+		this.bookEvent.emit(book);
 	}
 
 	showActions ($event:MouseEvent, book:Book) {
@@ -72,7 +70,7 @@ export class BookComponent implements OnInit {
 		this.bookService.removeBook(this.library, book)
 		.subscribe((res:any) => {
 			this.books.splice(this.searchBook(res._id), 1);
-			this.alertService.success(`Libro '${editedBook.name}' eliminado Correctamente`);
+			this.alertService.success(`Libro '${res.name}' eliminado Correctamente`);
 			this.closeModals();
 		}, (err:any) => {
 			this.alertService.error(err)

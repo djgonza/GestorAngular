@@ -45,14 +45,22 @@ System.register(["@angular/core", "@angular/router", "rxjs/Subject"], function (
                     });
                 }
                 AlertService.prototype.success = function (message, keepAfterNavigationChange) {
+                    var _this = this;
                     if (keepAfterNavigationChange === void 0) { keepAfterNavigationChange = false; }
                     this.keepAfterNavigationChange = keepAfterNavigationChange;
                     this.subject.next({ type: 'success', text: message });
+                    setTimeout(function () {
+                        _this.subject.next();
+                    }, 10000);
                 };
                 AlertService.prototype.error = function (message, keepAfterNavigationChange) {
+                    var _this = this;
                     if (keepAfterNavigationChange === void 0) { keepAfterNavigationChange = false; }
                     this.keepAfterNavigationChange = keepAfterNavigationChange;
                     this.subject.next({ type: 'error', text: message });
+                    setTimeout(function () {
+                        _this.subject.next();
+                    }, 30000);
                 };
                 AlertService.prototype.getMessage = function () {
                     return this.subject.asObservable();

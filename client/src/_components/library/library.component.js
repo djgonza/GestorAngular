@@ -29,10 +29,17 @@ System.register(["@angular/core", "../index", "../../_services/index"], function
                     this.libraryService = libraryService;
                     this.alertService = alertService;
                     this.books = [];
+                    this.bookSelected = null;
                     this.load();
                 }
                 LibraryComponent.prototype.ngOnInit = function () {
                     //console.log('library', this);
+                };
+                LibraryComponent.prototype.ngOnChanges = function (changes) {
+                    console.log('library cahnge', changes);
+                };
+                LibraryComponent.prototype.selectBook = function (book) {
+                    this.bookSelected = book;
                 };
                 LibraryComponent.prototype.show = function () {
                     console.log('library', this);
@@ -65,7 +72,10 @@ System.register(["@angular/core", "../index", "../../_services/index"], function
                     this.libraryService.getAllBooks(this._id)
                         .subscribe(function (books) {
                         books.map(function (book) {
-                            _this.books.push(new index_1.Book(book._id, book.name, book.library, book.structure));
+                            var structure = book.structure.map(function (structure) {
+                                return new index_1.Structure(structure.ref, structure.valueType, structure.name, structure._id);
+                            });
+                            _this.books.push(new index_1.Book(book._id, book.name, book.library, structure));
                         });
                     }, function (err) {
                         _this.alertService.error(err);

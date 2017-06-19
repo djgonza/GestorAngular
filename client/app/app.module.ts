@@ -14,7 +14,11 @@ import {
 	UserComponent,
 	ModalCreateBook,
 	ModalEditBook,
-	ModalRemoveBook
+	ModalRemoveBook,
+	StructureComponent,
+	ModalCreateStructure,
+	PageComponent,
+	PageFieldComponent
 } from './_components/index';
 
 //models
@@ -58,7 +62,11 @@ import { AppConfig } from './app.config';
 		UserComponent,
 		ModalCreateBook,
 		ModalEditBook,
-		ModalRemoveBook
+		ModalRemoveBook,
+		StructureComponent,
+		ModalCreateStructure,
+		PageComponent,
+		PageFieldComponent
 	],
 	providers: [
 		AppConfig,

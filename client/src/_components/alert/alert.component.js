@@ -29,6 +29,12 @@ System.register(["@angular/core", "../../_services/index"], function (exports_1,
                     var _this = this;
                     this.alertService.getMessage().subscribe(function (message) { _this.message = message; });
                 };
+                AlertComponent.prototype.ngOnChanges = function (changes) {
+                    console.log(changes);
+                };
+                AlertComponent.prototype.hideMessage = function () {
+                    this.message = null;
+                };
                 AlertComponent = __decorate([
                     core_1.Component({
                         moduleId: __moduleName,

@@ -1,0 +1,9 @@
+<div class="card">
+	<div class="card-block">
+		<div class="form-group">
+			<label>{{name}}</label>
+			<input type="{{valueType}}" [ngModel]="value" (ngModelChange)="validate($event)" class="form-control">
+			<small style="display: none" class="form-text text-muted">Fail</small>
+		</div>
+	</div>
+</div>

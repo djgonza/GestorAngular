@@ -1,4 +1,4 @@
-System.register(["./alert/index", "./app/index", "./login/index", "./register/index", "./library/index", "./book/index", "./user/index"], function (exports_1, context_1) {
+System.register(["./alert/index", "./app/index", "./login/index", "./register/index", "./library/index", "./book/index", "./user/index", "./structure/index", "./page/index"], function (exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     function exportStar_1(m) {
@@ -30,6 +30,12 @@ System.register(["./alert/index", "./app/index", "./login/index", "./register/in
             },
             function (index_7_1) {
                 exportStar_1(index_7_1);
+            },
+            function (index_8_1) {
+                exportStar_1(index_8_1);
+            },
+            function (index_9_1) {
+                exportStar_1(index_9_1);
             }
         ],
         execute: function () {

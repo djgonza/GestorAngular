@@ -14,6 +14,12 @@
 	</li>
 </ul>
 
+<structure-component
+*ngIf="bookSelected"
+[book]="bookSelected"
+>
+</structure-component>
+
 <modal-create-book-component 
 *ngIf="showModalCreateBook" 
 (newBook)="saveBook($event)"

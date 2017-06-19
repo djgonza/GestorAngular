@@ -28,17 +28,16 @@ System.register(["@angular/core", "./index", "../../_services/index"], function 
                 function BookComponent(bookService, alertService) {
                     this.bookService = bookService;
                     this.alertService = alertService;
+                    this.bookEvent = new core_1.EventEmitter();
                     this.showModalCreateBook = false;
                     this.showModalEditBook = false;
                     this.showModalRemoveBook = false;
                     this.shownActions = false;
                 }
-                BookComponent.prototype.ngOnInit = function () {
-                    //console.log('book', this);
-                };
                 BookComponent.prototype.selectBook = function (book) {
                     this.bookSelected = book;
                     this.shownActions = false;
+                    this.bookEvent.emit(book);
                 };
                 BookComponent.prototype.showActions = function ($event, book) {
                     this.shownActions = true;
@@ -77,7 +76,7 @@ System.register(["@angular/core", "./index", "../../_services/index"], function 
                     this.bookService.removeBook(this.library, book)
                         .subscribe(function (res) {
                         _this.books.splice(_this.searchBook(res._id), 1);
-                        _this.alertService.success("Libro '" + editedBook.name + "' eliminado Correctamente");
+                        _this.alertService.success("Libro '" + res.name + "' eliminado Correctamente");
                         _this.closeModals();
                     }, function (err) {
                         _this.alertService.error(err);
@@ -99,6 +98,10 @@ System.register(["@angular/core", "./index", "../../_services/index"], function 
                     core_1.Input(),
                     __metadata("design:type", Array)
                 ], BookComponent.prototype, "books", void 0);
+                __decorate([
+                    core_1.Output(),
+                    __metadata("design:type", Object)
+                ], BookComponent.prototype, "bookEvent", void 0);
                 BookComponent = __decorate([
                     core_1.Component({
                         moduleId: __moduleName,

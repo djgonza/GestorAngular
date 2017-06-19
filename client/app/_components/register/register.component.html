@@ -1,0 +1,54 @@
+<div class="container" style="padding-top: 2rem;">
+
+	<div class="card">
+		<div class="card-block">
+
+			<h1>Registro de Usuario</h1>
+
+			<div class="form-group">
+				<label>Nombre</label>
+				<input type="text" [ngModel]="user.firstName" (ngModelChange)="validateFirstName($event)" name="name" class="form-control" placeholder="Inserte un nombre">
+				<small class="form-text alert alert-danger" *ngIf="isSubmited && !isValidFirstName">
+					<strong *ngIf="user.firstName === ''">¡El nombre es requerido!</strong>
+				</small>
+			</div>
+			<div class="form-group">
+				<label>Apellidos</label>
+				<input type="text" [ngModel]="user.lastName" (ngModelChange)="validateLastName($event)" name="secondname" class="form-control" placeholder="Inserte los apellidos">
+				<small class="form-text alert alert-danger" *ngIf="isSubmited && !isValidLastName">
+					<strong *ngIf="user.lastName === ''">¡Los apellidos son requeridos!</strong>
+				</small>
+			</div>
+			<div class="form-group">
+				<label>Nombre de Usuario</label>
+				<input type="text" [ngModel]="user.userName" (ngModelChange)="validateUserName($event)" name="username" class="form-control" placeholder="Inserte un nombre de usuario">
+				<small class="form-text alert alert-danger" *ngIf="isSubmited  && !isValidUserName">
+					<strong *ngIf="isDuplicateUsername">¡Nombre de usuario ya registrado!</strong>
+					<strong *ngIf="user.username === ''">¡El nombre de usuario es requerido!</strong>
+				</small>
+			</div>
+			<div class="form-group">
+				<label>Email</label>
+				<input type="mail" [ngModel]="user.email" (ngModelChange)="validateEmail($event)" name="email" class="form-control" placeholder="Inserte un nombre">
+				<small class="form-text alert alert-danger" *ngIf="isSubmited  && !isValidEmail">
+					<strong *ngIf="!isValidEmail">¡Email incorrecto!</strong>
+					<strong *ngIf="user.email === ''">¡El email es requerido!</strong>
+				</small>
+			</div>
+			<div class="form-group">
+				<label>Contraseña</label>
+				<input type="password" [ngModel]="user.password" (ngModelChange)="validatePassword($event)" name="password" class="form-control" placeholder="Inserte un nombre">
+				<small class="form-text alert alert-danger" *ngIf="isSubmited  && !isValidPassword">
+					<strong *ngIf="!isValidPassword">¡Contraseña incorrecta!, la contraseña tiene que tener 8 caracteres como minimo.</strong>
+					<strong *ngIf="user.password === ''">¡La contraseña es requerida!</strong>
+				</small>
+			</div>
+
+			<div class="d-flex justify-content-end">
+				<button type="button" [disabled]="isLoanding" (click)="save()" class="btn btn-primary">Registrar <i *ngIf="isLoanding" class="material-icons icon-spin">loop</i></button>
+				<button type="button" (click)="login()" class="btn btn-link">Acceder</button>
+			</div>
+
+		</div>
+	</div>
+</div>

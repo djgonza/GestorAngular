@@ -1,0 +1,53 @@
+<div class="btn-toolbar justify-content-end">
+
+	<div class="btn-group mr-2">
+		<button class="btn btn-secondary" (click)="createNewPage()">
+			<i class="material-icons">note_add</i>
+		</button>
+		<button class="btn btn-secondary" (click)="saveCurrentPage()">
+			<i class="material-icons">save</i>
+		</button>
+		<button class="btn btn-secondary">
+			<i class="material-icons">mode_edit</i>
+		</button>
+	</div>
+
+	<div class="btn-group mr-2">
+		<button class="btn btn-secondary" (click)="previusPage()" [disabled]="pageIndex === 0">
+			<i class="material-icons">navigate_before</i>
+		</button>
+		<button class="btn btn-secondary"> {{pageIndex + 1}} de {{pages.length}}</button>
+		<button class="btn btn-secondary" (click)="nextPage()" [disabled]="pageIndex === pages.length - 1">
+			<i class="material-icons">navigate_next</i>
+		</button>
+	</div>
+
+	<div class="input-group">
+		<span class="input-group-addon"><i class="material-icons">search</i></span>
+		<input type="text" class="form-control" placeholder="Buscar...">
+	</div>
+
+</div>
+
+
+
+<div *ngIf="pages.length" class="d-flex flex-wrap justify-content-around">
+	<page-field-component
+	style="min-width: 50%"
+	*ngFor="let structure of book.structure"
+	[name]="structure.name"
+	[valueType]="structure.valueType"
+	[value]="getValueFromPageData(structure.ref)"
+	[ref]="structure.ref"
+	(valueChanged)="setValueFromPageData($event)">
+	</page-field-component>
+</div>
+
+
+
+
+
+
+
+
+

@@ -1,7 +1,7 @@
 declare var __moduleName: string;
 
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { Book, BookStructure } from '../index';
+import { Book } from '../index';
 
 @Component({
 	moduleId: __moduleName,

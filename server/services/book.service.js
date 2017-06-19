@@ -2,10 +2,12 @@ var config = require('config.json');
 var mongoose = require('mongoose');
 var Q = require('q');
 var Book = require('models/book.model');
+var Page = require('models/page.model');
 mongoose.Promise = global.Promise;
 
 var service = {};
 
+service.numberOfPages = numberOfPages;
 service.load = load;
 service.loadAll = loadAll;
 service.create = create;
@@ -13,6 +15,22 @@ service.update = update;
 service.remove = remove;
 
 module.exports = service;
+
+function numberOfPages (bookId) {
+
+	var deferred = Q.defer();
+
+	Page.count({book: bookId})
+	.exec()
+	.then(number => {
+		deferred.resolve(number);
+	})
+	.catch(err => {
+		deferred.reject(err);
+	})
+
+	return deferred.promise;
+}
 
 function load (bookId) {
 

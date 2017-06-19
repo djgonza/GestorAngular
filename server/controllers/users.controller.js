@@ -50,7 +50,7 @@ function register(req, res) {
 			res.sendStatus(200);
 		})
 		.catch((err) => {
-			res.status(400).send(err);
+			res.status(409).send(err);
 		});
 }
 
